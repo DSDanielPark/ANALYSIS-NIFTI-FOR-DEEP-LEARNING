@@ -1,0 +1,154 @@
+,img_affine_shape,img_affine_metrix,img_affine_metrix(raw value),file_name,data_dtype,nifti_img_shape,hdr_info,hdr.get_xyzt_units,hdr_raw,3d_array_mean,3d_array_std,3d_array_min,3d_array_max,unique_values,exception_val_count_in_binary_file
+0,"(4, 4)","[[   1.    0.   -0.  -98.]
+ [   0.    1.   -0. -134.]
+ [   0.    0.    1.  -72.]
+ [   0.    0.    0.    1.]]","[[   1.    0.   -0.  -98.]
+ [   0.    1.   -0. -134.]
+ [   0.    0.    1.  -72.]
+ [   0.    0.    0.    1.]]",sub001_001_0000,float32,"(197, 233, 189)","Analysis object at 0x000002493DBF9D90> <class 'nibabel.nifti1.Nifti1Header'> object, endian='<'
+sizeof_hdr      : 348
+data_type       : b''
+db_name         : b''
+extents         : 0
+session_error   : 0
+regular         : b'r'
+dim_info        : 0
+dim             : [  3 197 233 189   1   1   1   1]
+intent_p1       : 0.0
+intent_p2       : 0.0
+intent_p3       : 0.0
+intent_code     : none
+datatype        : float32
+bitpix          : 32
+slice_start     : 0
+pixdim          : [1. 1. 1. 1. 0. 0. 0. 0.]
+vox_offset      : 0.0
+scl_slope       : nan
+scl_inter       : nan
+slice_end       : 0
+slice_code      : unknown
+xyzt_units      : 2
+cal_max         : 0.0
+cal_min         : 0.0
+slice_duration  : 0.0
+toffset         : 0.0
+glmax           : 0
+glmin           : 0
+descrip         : b''
+aux_file        : b''
+qform_code      : scanner
+sform_code      : scanner
+quatern_b       : 0.0
+quatern_c       : 0.0
+quatern_d       : 0.0
+qoffset_x       : -98.0
+qoffset_y       : -134.0
+qoffset_z       : -72.0
+srow_x          : [  1.   0.  -0. -98.]
+srow_y          : [   0.    1.   -0. -134.]
+srow_z          : [  0.   0.   1. -72.]
+intent_name     : b''
+magic           : b'n+","('mm', 'unknown')","(348, b'', b'', 0, 0, b'r', 0, [  3, 197, 233, 189,   1,   1,   1,   1], 0., 0., 0., 0, 16, 32, 0, [1., 1., 1., 1., 0., 0., 0., 0.], 0., nan, nan, 0, 0, 2, 0., 0., 0., 0., 0, 0, b'', b'', 1, 1, 0., 0., 0., -98., -134., -72., [  1.,   0.,  -0., -98.], [   0.,    1.,   -0., -134.], [  0.,   0.,   1., -72.], b'', b'n+1')",7.375969824396351,14.86671042500728,0.0,0.0,"[  0.           1.80465543   1.82664633 ...  91.93461609  97.70724487
+ 103.96367645]",1916376
+1,"(4, 4)","[[   1.    0.   -0.  -98.]
+ [   0.    1.   -0. -134.]
+ [   0.    0.    1.  -72.]
+ [   0.    0.    0.    1.]]","[[   1.    0.   -0.  -98.]
+ [   0.    1.   -0. -134.]
+ [   0.    0.    1.  -72.]
+ [   0.    0.    0.    1.]]",sub001_002_0000,float32,"(197, 233, 189)","Analysis object at 0x000002493DBF9D90> <class 'nibabel.nifti1.Nifti1Header'> object, endian='<'
+sizeof_hdr      : 348
+data_type       : b''
+db_name         : b''
+extents         : 0
+session_error   : 0
+regular         : b'r'
+dim_info        : 0
+dim             : [  3 197 233 189   1   1   1   1]
+intent_p1       : 0.0
+intent_p2       : 0.0
+intent_p3       : 0.0
+intent_code     : none
+datatype        : float32
+bitpix          : 32
+slice_start     : 0
+pixdim          : [1. 1. 1. 1. 0. 0. 0. 0.]
+vox_offset      : 0.0
+scl_slope       : nan
+scl_inter       : nan
+slice_end       : 0
+slice_code      : unknown
+xyzt_units      : 2
+cal_max         : 0.0
+cal_min         : 0.0
+slice_duration  : 0.0
+toffset         : 0.0
+glmax           : 0
+glmin           : 0
+descrip         : b''
+aux_file        : b''
+qform_code      : scanner
+sform_code      : scanner
+quatern_b       : 0.0
+quatern_c       : 0.0
+quatern_d       : 0.0
+qoffset_x       : -98.0
+qoffset_y       : -134.0
+qoffset_z       : -72.0
+srow_x          : [  1.   0.  -0. -98.]
+srow_y          : [   0.    1.   -0. -134.]
+srow_z          : [  0.   0.   1. -72.]
+intent_name     : b''
+magic           : b'n+","('mm', 'unknown')","(348, b'', b'', 0, 0, b'r', 0, [  3, 197, 233, 189,   1,   1,   1,   1], 0., 0., 0., 0, 16, 32, 0, [1., 1., 1., 1., 0., 0., 0., 0.], 0., nan, nan, 0, 0, 2, 0., 0., 0., 0., 0, 0, b'', b'', 1, 1, 0., 0., 0., -98., -134., -72., [  1.,   0.,  -0., -98.], [   0.,    1.,   -0., -134.], [  0.,   0.,   1., -72.], b'', b'n+1')",8.130046316197072,16.04293208489034,0.0,0.0,"[  0.           1.17791295   1.93527746 ...  94.57878113  97.07363129
+ 102.10787964]",2024101
+2,"(4, 4)","[[   1.    0.   -0.  -98.]
+ [   0.    1.   -0. -134.]
+ [   0.    0.    1.  -72.]
+ [   0.    0.    0.    1.]]","[[   1.    0.   -0.  -98.]
+ [   0.    1.   -0. -134.]
+ [   0.    0.    1.  -72.]
+ [   0.    0.    0.    1.]]",sub001_003_0000,float32,"(197, 233, 189)","Analysis object at 0x000002493DBF9D90> <class 'nibabel.nifti1.Nifti1Header'> object, endian='<'
+sizeof_hdr      : 348
+data_type       : b''
+db_name         : b''
+extents         : 0
+session_error   : 0
+regular         : b'r'
+dim_info        : 0
+dim             : [  3 197 233 189   1   1   1   1]
+intent_p1       : 0.0
+intent_p2       : 0.0
+intent_p3       : 0.0
+intent_code     : none
+datatype        : float32
+bitpix          : 32
+slice_start     : 0
+pixdim          : [1. 1. 1. 1. 0. 0. 0. 0.]
+vox_offset      : 0.0
+scl_slope       : nan
+scl_inter       : nan
+slice_end       : 0
+slice_code      : unknown
+xyzt_units      : 2
+cal_max         : 0.0
+cal_min         : 0.0
+slice_duration  : 0.0
+toffset         : 0.0
+glmax           : 0
+glmin           : 0
+descrip         : b''
+aux_file        : b''
+qform_code      : scanner
+sform_code      : scanner
+quatern_b       : 0.0
+quatern_c       : 0.0
+quatern_d       : 0.0
+qoffset_x       : -98.0
+qoffset_y       : -134.0
+qoffset_z       : -72.0
+srow_x          : [  1.   0.  -0. -98.]
+srow_y          : [   0.    1.   -0. -134.]
+srow_z          : [  0.   0.   1. -72.]
+intent_name     : b''
+magic           : b'n+","('mm', 'unknown')","(348, b'', b'', 0, 0, b'r', 0, [  3, 197, 233, 189,   1,   1,   1,   1], 0., 0., 0., 0, 16, 32, 0, [1., 1., 1., 1., 0., 0., 0., 0.], 0., nan, nan, 0, 0, 2, 0., 0., 0., 0., 0, 0, b'', b'', 1, 1, 0., 0., 0., -98., -134., -72., [  1.,   0.,  -0., -98.], [   0.,    1.,   -0., -134.], [  0.,   0.,   1., -72.], b'', b'n+1')",7.619528077084282,15.773770119071319,0.0,0.0,"[ 0.          1.32029104  1.40164983 ... 96.6932373  96.71357727
+ 98.74754333]",1823670
