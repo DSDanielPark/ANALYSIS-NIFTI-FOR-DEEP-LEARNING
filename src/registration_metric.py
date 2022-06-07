@@ -1,6 +1,6 @@
 import numpy as np
 import SimpleITK as sitk
-import ants
+# import ants
 from ipywidgets import interact, fixed
 import matplotlib.pyplot as plt
 
@@ -44,12 +44,12 @@ class RegistrationMetric:
 
         return metric_dict
 
-    def display_images_with_alpha(image_z: int, alpha: np.float_, fixed: ants.core.ANTsImage, moving: ants.core.ANTsImage) -> plt:
+    # def display_images_with_alpha(image_z: int, alpha: np.float_, fixed: ants.core.ANTsImage, moving: ants.core.ANTsImage) -> plt:
 
-        img = (1.0 - alpha) * fixed[:, :, image_z] + alpha * moving[:, :, image_z]
-        plt.imshow(sitk.GetArrayViewFromImage(img), cmap=plt.cm.Greys_r)
-        plt.axis("off")
-        plt.show()
+    #     img = (1.0 - alpha) * fixed[:, :, image_z] + alpha * moving[:, :, image_z]
+    #     plt.imshow(sitk.GetArrayViewFromImage(img), cmap=plt.cm.Greys_r)
+    #     plt.axis("off")
+    #     plt.show()
 
     def visuall_validation(self, nii_file_path1: str, nii_file_path2: str):
         fixed_image = sitk.ReadImage(nii_file_path1)

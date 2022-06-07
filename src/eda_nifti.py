@@ -1,5 +1,4 @@
 import argparse
-from hamcrest import ends_with
 import pandas as pd
 import glob
 import os
@@ -111,6 +110,8 @@ class NiftiAnalysis:
         	#print(nifti_path)
             temp_dict = dict()
             img = nib.load(nifti_path)
+            sx, sy, sz = img.header.get_zooms()
+            volume = sx * sy * sz
 		
             # 0, 1이 아닌 값들이 segmentation binary nifti file에 존재하는지 확인
             img_array = img.get_fdata()
@@ -120,6 +121,10 @@ class NiftiAnalysis:
             hdr = img.header
             hdr_info = self.save_print_instance(hdr)
             raw = hdr.structarr		
+            
+            temp_dict['file_path'] = nifti_path
+            temp_dict['voxel_volume'] = f'{volume}mm3'
+            temp_dict['spacing'] = f'{sx}mm x {sy}mm x {sz}mm'
             temp_dict['img_affine_shape'] = img.affine.shape
             temp_dict['img_affine_metrix'] = np.round(img.affine)
             temp_dict['img_affine_metrix(raw value)'] = img.affine
