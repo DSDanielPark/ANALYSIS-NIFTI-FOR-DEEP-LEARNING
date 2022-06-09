@@ -74,7 +74,7 @@ class NiftiAnalysis:
         return None
 
 
-    def recursive_find_all_files(self, top_folder_path, file_format):
+    def recursive_find_all_files(self, top_folder_path: str, file_format: str) -> list:
         gathered_file_pathes = []
 
         for (root, directories, files) in os.walk(top_folder_path):
@@ -92,7 +92,7 @@ class NiftiAnalysis:
         return io.getvalue()
 
         
-    def save_summary_table(self, globbed_nifti_file_paths, save_full_path_with_file_name):
+    def save_summary_table(self, globbed_nifti_file_paths: str, save_full_path_with_file_name: str, task1_or_task2:str) -> None:
         '''
         input: glob으로 리스트로 만든 k개의 nifti 파일들의 경로들 
             ex) ['./1.nii.gz', './2.nii.gz' .... './k.nii.gz']
@@ -103,15 +103,19 @@ class NiftiAnalysis:
         칼럼으로 저장되는 내용들은 nibabel 공식 도큐멘테이션 참조 
 
         '''
+
         total_dict = dict()
-        
+        n_count = np.count_nonzero 
         for i, nifti_path in enumerate(globbed_nifti_file_paths):
 		    #print(i)
         	#print(nifti_path)
             temp_dict = dict()
             img = nib.load(nifti_path)
+            x,y,z = img.shape
+            center_x, center_y, center_z = int(np.round(x/2)), int(np.round(y/2)), int(np.round(z/2))
+            
             sx, sy, sz = img.header.get_zooms()
-            volume = sx * sy * sz
+            volume_unit = sx * sy * sz
 		
             # 0, 1이 아닌 값들이 segmentation binary nifti file에 존재하는지 확인
             img_array = img.get_fdata()
@@ -123,9 +127,8 @@ class NiftiAnalysis:
             raw = hdr.structarr		
             
             temp_dict['file_path'] = nifti_path
-            temp_dict['voxel_volume'] = f'{volume}mm3'
+            temp_dict['voxel_volume'] = f'{volume_unit}mm3'
             temp_dict['spacing'] = f'{sx}mm x {sy}mm x {sz}mm'
-            temp_dict['img_affine_shape'] = img.affine.shape
             temp_dict['img_affine_metrix'] = np.round(img.affine)
             temp_dict['img_affine_metrix(raw value)'] = img.affine
             temp_dict['file_name'] = file_name
@@ -135,17 +138,38 @@ class NiftiAnalysis:
             temp_dict['hdr.get_xyzt_units'] = hdr.get_xyzt_units()
             temp_dict['hdr_raw'] = raw
             temp_dict['3d_array_mean'] = img_array.mean()
-            
             temp_dict['3d_array_std'] = img_array.std()
             temp_dict['3d_array_min'] = img_array.min()
             temp_dict['3d_array_max'] = img_array.min()
             temp_dict['unique_values'] = np.unique(img_flatten_array, return_counts=True)[0]
             temp_dict['exception_val_count_in_binary_file'] = abnormal_mask.size
-		
+
+            if 'msk.nii.gz' in nifti_path and task1_or_task2 == 'task1': # (MNI-152 geometric space)
+                temp_dict['(mask)volume_lesion_estimation_in_voxel_level'] = n_count(img_array) * volume_unit
+                temp_dict['(mask)top_back_left'] = n_count(img_array[center_x:, :center_y, center_z:])
+                temp_dict['(mask)top_back_right'] = n_count(img_array[:center_x, :center_y, :center_z])
+                temp_dict['(mask)top_front_left'] = n_count(img_array [:center_x, center_y:, center_z:])
+                temp_dict['(mask)top_front_right'] = n_count(img_array [:center_x , center_y:, :center_z])
+                temp_dict['(mask)bottom_back_left'] = n_count(img_array[center_x:, :center_y, center_z:])
+                temp_dict['(mask)bottom_back_right'] = n_count(img_array[center_x:, :center_y, center_z])
+                temp_dict['(mask)bottmo_front_left'] = n_count(img_array[center_x:, center_y:, center_y:])
+                temp_dict['(mask)bottom_front_right'] = n_count(img_array[center_x:, center_y:, :center_z])
+
+            elif 'mask.nii.gz' in nifti_path and task1_or_task2 == 'task2': # (MNI-152 geometric space)
+                temp_dict['(mask)volume_lesion_estimation_in_voxel_level'] = n_count(img_array) * volume_unit
+                temp_dict['(mask)top_back_left'] = n_count(img_array[center_x:, :center_y, center_z:])
+                temp_dict['(mask)top_back_right'] = n_count(img_array[:center_x, :center_y, :center_z])
+                temp_dict['(mask)top_front_left'] = n_count(img_array [:center_x, center_y:, center_z:])
+                temp_dict['(mask)top_front_right'] = n_count(img_array [:center_x , center_y:, :center_z])
+                temp_dict['(mask)bottom_back_left'] = n_count(img_array[center_x:, :center_y, center_z:])
+                temp_dict['(mask)bottom_back_right'] = n_count(img_array[center_x:, :center_y, center_z])
+                temp_dict['(mask)bottmo_front_left'] = n_count(img_array[center_x:, center_y:, center_y:])
+                temp_dict['(mask)bottom_front_right'] = n_count(img_array[center_x:, center_y:, :center_z])
+
             total_dict[i] = temp_dict
         
         df_summary = pd.DataFrame(total_dict).T
-        df_summary.to_csv(save_full_path_with_file_name)
+        df_summary.to_csv(save_full_path_with_file_name, encoding='utf-8-sig', index=False)
         print('...summary table saved')
 
         return None
