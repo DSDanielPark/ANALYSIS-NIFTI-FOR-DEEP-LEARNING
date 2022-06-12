@@ -91,8 +91,21 @@ class NiftiAnalysis:
         print(*message, file=io, end="")
         return io.getvalue()
 
-        
+    def count_center_voxel_labels(self, nifti_path: str, x_val: int, y_val: int, z_val):
+        img = nib.load(nifti_path)
+        x,y,z = img.shape
+        center_x, center_y, center_z = int(np.round(x/2)), int(np.round(y/2)), int(np.round(z/2))
+        n_count = np.count_nonzero 
+        img_array = img.get_fdata()
+
+        center_region_mask_label_count = n_count(img_array [center_x-x_val:center_x+x_val, center_y-y_val:center_y+y_val, center_z-z_val:center_z+z_val])
+
+        return center_region_mask_label_count
+
+
+
     def save_summary_table(self, globbed_nifti_file_paths: str, save_full_path_with_file_name: str, task1_or_task2:str) -> None:
+
         '''
         input: glob으로 리스트로 만든 k개의 nifti 파일들의 경로들 
             ex) ['./1.nii.gz', './2.nii.gz' .... './k.nii.gz']
@@ -154,6 +167,7 @@ class NiftiAnalysis:
                 temp_dict['(mask)bottom_back_right'] = n_count(img_array[center_x:, :center_y, center_z])
                 temp_dict['(mask)bottmo_front_left'] = n_count(img_array[center_x:, center_y:, center_y:])
                 temp_dict['(mask)bottom_front_right'] = n_count(img_array[center_x:, center_y:, :center_z])
+                temp_dict['(mask)bottom_front_right +- 10'] = n_count(img_array[center_x-10:center_x+10, center_y-10:center_y+10, center_z-10:center_z+10])
 
             elif 'mask.nii.gz' in nifti_path and task1_or_task2 == 'task2': # (MNI-152 geometric space)
                 temp_dict['(mask)volume_lesion_estimation_in_voxel_level'] = n_count(img_array) * volume_unit
@@ -165,6 +179,8 @@ class NiftiAnalysis:
                 temp_dict['(mask)bottom_back_right'] = n_count(img_array[center_x:, :center_y, center_z])
                 temp_dict['(mask)bottmo_front_left'] = n_count(img_array[center_x:, center_y:, center_y:])
                 temp_dict['(mask)bottom_front_right'] = n_count(img_array[center_x:, center_y:, :center_z])
+                temp_dict['(mask)bottom_front_right +- 10'] = n_count(img_array[center_x-10:center_x+10, center_y-10:center_y+10, center_z-10:center_z+10])
+
 
             total_dict[i] = temp_dict
         
