@@ -189,6 +189,9 @@ class NiftiAnalysis:
         print('...summary table saved')
 
         return None
+
+
+
 	
 
 if __name__ == "__main__":
@@ -201,5 +204,5 @@ if __name__ == "__main__":
 	
     #01. nifti_folder 안에 있는 모든 '.nii.gz' 파일을 대상으로 메타 정보 엑셀 파일 생성
     ## 'nii'파일 존재시 list join 해주세요.
-    niftieda.save_summary_table(all_nifti_files_under_nifti_folder, './nifti_eda_result.csv')
+    niftieda.save_summary_table(all_nifti_files_under_nifti_folder, './nifti_eda_result.csv', 'mni')
 	
