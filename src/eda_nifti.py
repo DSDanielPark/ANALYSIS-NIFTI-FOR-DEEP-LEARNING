@@ -104,7 +104,7 @@ class NiftiAnalysis:
 
 
 
-    def save_summary_table(self, globbed_nifti_file_paths: str, save_full_path_with_file_name: str, task1_or_task2:str) -> None:
+    def save_summary_table(self, globbed_nifti_file_paths: str, save_full_path_with_file_name: str, mni_or_not:str) -> None:
 
         '''
         input: glob으로 리스트로 만든 k개의 nifti 파일들의 경로들 
@@ -157,7 +157,7 @@ class NiftiAnalysis:
             temp_dict['unique_values'] = np.unique(img_flatten_array, return_counts=True)[0]
             temp_dict['exception_val_count_in_binary_file'] = abnormal_mask.size
 
-            if 'msk.nii.gz' in nifti_path and task1_or_task2 == 'task1': # (MNI-152 geometric space)
+            if 'msk.nii.gz' in nifti_path and mni_or_not == 'mni': # (MNI-152 geometric space)
                 temp_dict['(mask)volume_lesion_estimation_in_voxel_level'] = n_count(img_array) * volume_unit
                 temp_dict['(mask)top_back_left'] = n_count(img_array[center_x:, :center_y, center_z:])
                 temp_dict['(mask)top_back_right'] = n_count(img_array[:center_x, :center_y, :center_z])
@@ -169,7 +169,7 @@ class NiftiAnalysis:
                 temp_dict['(mask)bottom_front_right'] = n_count(img_array[center_x:, center_y:, :center_z])
                 temp_dict['(mask)bottom_front_right +- 10'] = n_count(img_array[center_x-10:center_x+10, center_y-10:center_y+10, center_z-10:center_z+10])
 
-            elif 'mask.nii.gz' in nifti_path and task1_or_task2 == 'task2': # (MNI-152 geometric space)
+            elif 'mask.nii.gz' in nifti_path and mni_or_not == 'none': ## if the other geometric space
                 temp_dict['(mask)volume_lesion_estimation_in_voxel_level'] = n_count(img_array) * volume_unit
                 temp_dict['(mask)top_back_left'] = n_count(img_array[center_x:, :center_y, center_z:])
                 temp_dict['(mask)top_back_right'] = n_count(img_array[:center_x, :center_y, :center_z])
