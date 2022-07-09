@@ -43,7 +43,7 @@ class RegistrationMetric:
             metric_dict[metric] = np.round(registration_method.MetricEvaluate(img1, img2), 4)
 
         return metric_dict
-
+    # antspy가 설치된 환경에서 
     # def display_images_with_alpha(image_z: int, alpha: np.float_, fixed: ants.core.ANTsImage, moving: ants.core.ANTsImage) -> plt:
 
     #     img = (1.0 - alpha) * fixed[:, :, image_z] + alpha * moving[:, :, image_z]
@@ -51,12 +51,23 @@ class RegistrationMetric:
     #     plt.axis("off")
     #     plt.show()
 
+
+
+
+
+#https://discourse.itk.org/t/how-can-i-catch-the-registered-slices-in-moving-resampled-and-save-them-in-a-folder/4170
+    def display_images_with_alpha(image_z, alpha, fixed, moving):
+        img = (1.0 - alpha)*fixed[:,:,image_z] + alpha*moving[:,:,image_z] 
+        plt.imshow(sitk.GetArrayViewFromImage(img),cmap=plt.cm.Greys_r);
+        plt.axis('off')
+        plt.show()
+
     def visuall_validation(self, nii_file_path1: str, nii_file_path2: str):
         fixed_image = sitk.ReadImage(nii_file_path1)
         moving_image = sitk.ReadImage(nii_file_path2)
 
         interact(
-            self.display_images,
+            self.display_images_with_alpha,
             fixed_image_z=(0, fixed_image.GetSize()[2] - 1),
             moving_image_z=(0, moving_image.GetSize()[2] - 1),
             fixed_npa=fixed(sitk.GetArrayViewFromImage(fixed_image)),
