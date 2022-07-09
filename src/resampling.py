@@ -4,7 +4,7 @@ import os
 import SimpleITK as sitk
 
 
-def resample_fixedsize_fixedspacing (nifti_file_path, save_folder_path, interpolation, new_size, new_spacing):
+def resample_fixedsize_fixedspacing (nifti_file_path: str, save_folder_path: str, interpolation: str, new_size: int, new_spacing: list) -> None:
     '''
     #img_sitk : sitk image (3D)
     #interppolation: sitk.sitkLinear
@@ -50,7 +50,7 @@ def resample_fixedsize_fixedspacing (nifti_file_path, save_folder_path, interpol
     os.makedirs(save_folder_path, exist_ok=True)
     sitk.WriteImage(new_img, f'{save_folder_path}/{file_name}_resampled.nii.gz')
 
-    return new_img
+    return None
 
 
 
