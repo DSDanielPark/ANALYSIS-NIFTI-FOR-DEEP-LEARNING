@@ -118,3 +118,28 @@ def monai_cropforeground(nifit_file_path:str, save_path: str):
 
     img = nib.Nifti1Image(cropped_img, original_affine) 
     img.to_filename(f'{save_path}/{file_name}.nii.gz')
+
+
+
+def get_nonzero_xyz_of_nii(nifti_file_path: str):
+    
+    file_name = nifti_file_path.split('\\')[-1].rstrip('nii.gz')
+    
+    nii = nib.load(nifti_file_path)
+    nii_array = nii.get_fdata()
+    original_affine = nii.affine
+    print(nii.shape)
+    
+    non_zeros = np.nonzero(nii_array>3)
+
+    x_min = non_zeros[0].min()
+    x_max = non_zeros[0].max()
+
+    y_min = non_zeros[1].min()
+    y_max = non_zeros[1].max()
+
+    z_min = non_zeros[2].min()
+    z_max = non_zeros[2].max()
+    
+    return x_min, x_max, y_min, y_max, z_min, z_max
+
